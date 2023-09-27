@@ -169,7 +169,7 @@ export default function Layout(props) {
                   </ul>
                 </li>
                 <li>
-                  <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+                  <div className="text-xs font-semibold leading-6 text-gray-400">Reports</div>
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
                     {reports.map((item) => (
                       <li key={item.name}>

@@ -32,14 +32,6 @@ export class EmployerPaymentsService {
       createEmployerPaymentDto;
     const _contribution_month = moment(contribution_month);
     const _due_date = moment(due_date);
-    const employer = await this.prismaService.employer.findFirst({
-      where: {
-        id: employer_id,
-      },
-      include: {
-        employer_payments: true,
-      },
-    });
 
     const existing_payment = await this.prismaService.employerPayment.findFirst(
       {
@@ -94,6 +86,16 @@ export class EmployerPaymentsService {
         due_date: _due_date.format(DEFAULT_DATETIME_FORMAT),
         contribution_month: _contribution_month.format(DEFAULT_DATETIME_FORMAT),
         payment_status: PAYMENT_STATUS_PENDING,
+      },
+    });
+
+    // get employer
+    const employer = await this.prismaService.employer.findFirst({
+      where: {
+        id: employer_id,
+      },
+      include: {
+        employer_payments: true,
       },
     });
 

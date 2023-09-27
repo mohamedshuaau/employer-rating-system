@@ -144,7 +144,7 @@ export class EmployersService {
     ).length;
 
     crawler = crawler_records.filter(
-      (payment) => payment.payment_date === null,
+      (payment) => payment.payment_date == null,
     ).length;
 
     if (platinum === 12) {
