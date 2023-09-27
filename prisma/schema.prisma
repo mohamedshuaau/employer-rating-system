@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Employer {
+  id                 Int          @default(autoincrement()) @id
+  name               String
+  email              String       @unique
+  contact_number     String       @unique
+  is_active          Boolean      @default(true)
+  employer_payments  EmployerPayment[]
+  point_rating       Int @default(0)
+  star_rating        String?
+  created_at         DateTime     @default(now()) @map("created_at")
+  updated_at         DateTime     @updatedAt @map("updated_at")
+  deleted_at         DateTime?    @map("deleted_at")
+
+  @@map("employers")
+}
+
+model EmployerPayment {
+  id                    Int         @default(autoincrement()) @id
+  employer              Employer    @relation(fields: [employer_id], references: [id])
+  employer_id           Int
+  contribution_month    String
+  payment_date          String?
+  due_date              String
+  paid_amount           Decimal?    @db.Decimal(9,2)
+  payment_status        Int
+  created_at            DateTime     @default(now()) @map("created_at")
+  updated_at            DateTime     @updatedAt @map("updated_at")
+  deleted_at            DateTime?    @map("deleted_at")
+
+  @@map("employer_payments")
+}
