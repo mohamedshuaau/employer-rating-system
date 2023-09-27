@@ -136,7 +136,7 @@ export class EmployerPaymentsService {
       skip: offset,
       take: limit,
       orderBy: {
-        id: 'desc',
+        payment_date: 'desc',
       },
       include: {
         employer: true,
